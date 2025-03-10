@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.IRepository;
 using DomainLayer.Model;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,58 @@ namespace DataAccessLayer.Repository
 {
     class UserRepository : IUser
     {
-        public User Create(User user)
+        private readonly UserManager<User> _userManager;
+
+        public UserRepository(UserManager<User> userManager)
         {
-            throw new NotImplementedException();
+            _userManager = userManager;
         }
 
-        public void Delete(User user)
+        public async Task<User> Create(User user)
         {
-            throw new NotImplementedException();
+            IdentityResult result =  await _userManager.CreateAsync(user, user.PasswordHash);
+
+            if (!result.Succeeded)
+            {
+                return null;
+            }
+
+            return user;
         }
 
-        public User? Get()
+        public  async Task<bool> Delete(User user)
         {
-            throw new NotImplementedException();
+            IdentityResult result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<User?> Get(string id)
+        {
+            return await _userManager.FindByIdAsync(id);
         }
 
         public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _userManager.Users.ToList();
         }
 
-        public User? Update()
+        public async Task<User?> Update(User user)
         {
-            throw new NotImplementedException();
+            IdentityResult result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                return null;
+            }
+
+            return user;
         }
     }
+   
 }

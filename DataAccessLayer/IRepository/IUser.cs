@@ -14,7 +14,7 @@ namespace DataAccessLayer.IRepository
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Object of User</returns>
-        User Create(User user);
+        Task<User> Create(User user);
 
         /// <summary>
         /// Get Users
@@ -25,20 +25,20 @@ namespace DataAccessLayer.IRepository
         /// <summary>
         /// Update User
         /// </summary>
-        /// <returns></returns>
-        User? Update();
+        /// <returns>Ojbect of User</returns>
+        Task<User?> Update(User user);
 
         /// <summary>
         /// Get a User
         /// </summary>
         /// <returns>Object of User</returns>
-        User? Get();
+        Task<User?> Get(string id);
 
         /// <summary>
         /// Delete User
         /// </summary>
         /// <param name="user"></param>
-        void Delete(User user);
+        Task<bool> Delete(User user);
        
 
     }
