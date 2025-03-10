@@ -18,6 +18,7 @@ namespace DataAccessLayer.Repository
             _userManager = userManager;
         }
 
+        //funciton to create a user
         public async Task<User> Create(User user)
         {
             IdentityResult result =  await _userManager.CreateAsync(user, user.PasswordHash);
@@ -30,6 +31,8 @@ namespace DataAccessLayer.Repository
             return user;
         }
 
+
+        //function to delete a user
         public  async Task<bool> Delete(User user)
         {
             IdentityResult result = await _userManager.DeleteAsync(user);
@@ -42,19 +45,23 @@ namespace DataAccessLayer.Repository
             return false;
         }
 
+
+        //function to get a user
         public async Task<User?> Get(string id)
         {
             return await _userManager.FindByIdAsync(id);
         }
 
+        //funciton to get all users
         public List<User> GetAll()
         {
             return _userManager.Users.ToList();
         }
 
+        //function to update a user
         public async Task<User?> Update(User user)
         {
-            IdentityResult result = await _userManager.DeleteAsync(user);
+            IdentityResult result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
