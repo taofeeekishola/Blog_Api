@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repository
 {
-    class UserRepository : IUser
+    public class UserRepository : IUser
     {
         private readonly UserManager<User> _userManager;
 
