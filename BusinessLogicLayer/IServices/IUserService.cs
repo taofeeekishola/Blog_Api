@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Model;
+using DomainLayer.UserDto;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace BusinessLogicLayer.IServices
         /// <param name="user"></param>
         /// <param name="message"></param>
         /// <returns>The created User object or null if creation failed</returns>
-        Task<User?> CreateUser(User user);
+        Task<User?> CreateUser(CreateUserDto userDto);
 
         /// <summary>
         /// Get all Users

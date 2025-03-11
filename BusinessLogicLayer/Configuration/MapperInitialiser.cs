@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DomainLayer.CommentDto;
 using DomainLayer.CommentDtp;
+using DomainLayer.DTO;
+using DomainLayer.LikeDto;
 using DomainLayer.Model;
 using DomainLayer.PostDto;
 using DomainLayer.UserDto;
@@ -31,6 +33,11 @@ namespace BusinessLogicLayer.Configuration
             CreateMap<Comment, CreatCommentDto>().ReverseMap();
             CreateMap<Comment, UpdateCommentDto>().ReverseMap();
             CreateMap<Comment, CommentDto>().ReverseMap();
+
+            // Mappers for likes
+            CreateMap<Like, CreateLikeDto>().ReverseMap();
+            //CreateMap<Like, UpdateLikeDto>().ReverseMap();
+            CreateMap<Like, LikeDto>().ReverseMap();
         }
     }
 }

@@ -19,16 +19,17 @@ namespace DataAccessLayer.Repository
         }
 
         //funciton to create a user
-        public async Task<User> Create(User user)
+        public async Task<User> Create(User user, string password)
         {
-            IdentityResult result =  await _userManager.CreateAsync(user, user.PasswordHash);
+            // Create the user with the provided password
+            IdentityResult result = await _userManager.CreateAsync(user, password);
 
             if (!result.Succeeded)
             {
-                return null;
+                return null; // Return null if user creation fails
             }
 
-            return user;
+            return user; // Return the created user
         }
 
 

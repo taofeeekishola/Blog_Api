@@ -14,7 +14,7 @@ namespace DataAccessLayer.IRepository
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Object of User</returns>
-        Task<User> Create(User user);
+        Task<User> Create(User user, string password);
 
         /// <summary>
         /// Get Users

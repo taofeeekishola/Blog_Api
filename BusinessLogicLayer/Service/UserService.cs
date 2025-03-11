@@ -1,6 +1,9 @@
-﻿using BusinessLogicLayer.IServices;
+﻿using AutoMapper;
+using BusinessLogicLayer.IServices;
+using DataAccessLayer.Repository;
 using DataAccessLayer.UnitOfWorkFolder;
 using DomainLayer.Model;
+using DomainLayer.UserDto;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,21 +13,32 @@ namespace BusinessLogicLayer.Service
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        IMapper _imapper;
 
-        public UserService(IUnitOfWork unitOfWork)
+        public UserService(IUnitOfWork unitOfWork, IMapper imapper)
         {
             _unitOfWork = unitOfWork;
+            _imapper = imapper;
         }
 
-        public async Task<User?> CreateUser(User user)
+        public async Task<User?> CreateUser(CreateUserDto userDto)
         {
-            if (string.IsNullOrEmpty(user.firstName) || string.IsNullOrEmpty(user.lastName) || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.PasswordHash))
+            // Validate input
+            if (string.IsNullOrEmpty(userDto.FirstName) || // Use PascalCase: FirstName
+                string.IsNullOrEmpty(userDto.LastName) ||  // Use PascalCase: LastName
+                string.IsNullOrEmpty(userDto.Email) ||
+                string.IsNullOrEmpty(userDto.Password))
             {
                 return null;
             }
 
-            var createdUser = await _unitOfWork.userRepository.Create(user);
-            
+            // Map DTO to User entity
+            var user = _imapper.Map<User>(userDto);
+            user.UserName = userDto.Email; // Set UserName to Email (required by Identity)
+
+            // Create the user
+            var createdUser = await _unitOfWork.userRepository.Create(user, userDto.Password);
+
             return createdUser;
         }
 
@@ -57,8 +71,8 @@ namespace BusinessLogicLayer.Service
             }
 
             // Update only non-password fields
-            existingUser.firstName = user.firstName;
-            existingUser.lastName = user.lastName;
+            existingUser.FirstName = user.FirstName;
+            existingUser.FirstName = user.FirstName;
             existingUser.Email = user.Email;
 
             await _unitOfWork.userRepository.Update(existingUser);
