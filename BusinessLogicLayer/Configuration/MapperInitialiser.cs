@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DomainLayer.CommentDto;
+using DomainLayer.CommentDtp;
 using DomainLayer.Model;
 using DomainLayer.PostDto;
 using DomainLayer.UserDto;
@@ -21,12 +23,14 @@ namespace BusinessLogicLayer.Configuration
             CreateMap<User, UserDto>().ReverseMap();
 
             //mappers for posts
-           
             CreateMap<Post, CreatePostDto>().ReverseMap();
-
             CreateMap<Post, UpdatePostDto>().ReverseMap();
-
             CreateMap<Post, PostDto>().ReverseMap();
+
+            //Mappers for comments
+            CreateMap<Comment, CreatCommentDto>().ReverseMap();
+            CreateMap<Comment, UpdateCommentDto>().ReverseMap();
+            CreateMap<Comment, CommentDto>().ReverseMap();
         }
     }
 }
