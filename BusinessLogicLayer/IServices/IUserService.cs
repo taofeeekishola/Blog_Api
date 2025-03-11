@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.IServices
         /// <param name="user"></param>
         /// <param name="message"></param>
         /// <returns>The created User object or null if creation failed</returns>
-        Task<User?> CreateUser(User user, out string message);
+        Task<User?> CreateUser(User user);
 
         /// <summary>
         /// Get all Users
@@ -34,7 +34,7 @@ namespace BusinessLogicLayer.IServices
         /// <param name="user">The user with updated information</param>
         /// <param name="message">Output message about the operation result</param>
         /// <returns>The updated User object or null if update failed</returns>
-        Task<User?> UpdateUser(User user, out string message);
+        Task<User?> UpdateUser(User user);
 
         /// <summary>
         /// Delete User

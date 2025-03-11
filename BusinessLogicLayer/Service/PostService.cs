@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Service
 {
-    class PostService : IPostService
+    public class PostService : IPostService
     {
         private readonly IUnitOfWork _unitOfWork;
 

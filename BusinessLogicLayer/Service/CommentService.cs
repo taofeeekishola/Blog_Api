@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Service
 {
-    class CommentService : ICommentService
+    public class CommentService : ICommentService
     {
         private readonly IUnitOfWork _unitOfWork;
 

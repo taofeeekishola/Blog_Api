@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.IServices
 {
-    interface ILikeService
+    public interface ILikeService
     {
         /// <summary>
         /// Create Like

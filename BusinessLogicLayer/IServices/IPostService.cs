@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.IServices
 {
-    interface IPostService
+    public interface IPostService
     {
         /// <summary>
         /// Create a Post

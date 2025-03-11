@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.IServices
 {
-    interface ICommentService
+    public interface ICommentService
     {
         /// <summary>
         /// Create a Comment

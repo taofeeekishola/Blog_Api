@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Service
 {
-    class LikeService : ILikeService
+    public class LikeService : ILikeService
     {
 
         private readonly IUnitOfWork _unitOfWork;
