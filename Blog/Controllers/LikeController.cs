@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.IServices;
-using BusinessLogicLayer.Service;
-using DomainLayer.CommentDto;
 using DomainLayer.DTO;
 using DomainLayer.LikeDto;
 using DomainLayer.Model;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
@@ -25,6 +23,7 @@ namespace Blog.Controllers
 
 
         //endpoint to get all likes
+        [Authorize]
         [HttpGet]
         public IActionResult GetLike()
         {
@@ -34,6 +33,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to create like
+        [Authorize]
         [HttpPost]
         public IActionResult CreateLike([FromBody] CreateLikeDto likedto)
         {
@@ -52,6 +52,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to delete a like
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteLike(int id) // Add the parameter type (int)
         {

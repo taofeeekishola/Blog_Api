@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.IServices;
-using DataAccessLayer.Repository;
 using DataAccessLayer.UnitOfWorkFolder;
 using DomainLayer.Model;
 using DomainLayer.UserDto;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogicLayer.Service
 {
@@ -21,6 +18,7 @@ namespace BusinessLogicLayer.Service
             _imapper = imapper;
         }
 
+        //function to create a user
         public async Task<User?> CreateUser(CreateUserDto userDto)
         {
             // Validate input
@@ -42,11 +40,13 @@ namespace BusinessLogicLayer.Service
             return createdUser;
         }
 
+        //function to get all users
         public List<User> GetAllUsers()
         {
             return _unitOfWork.userRepository.GetAll();
         }
 
+        //function to get a single user
         public async Task<User?> GetUser(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -57,6 +57,7 @@ namespace BusinessLogicLayer.Service
             return await _unitOfWork.userRepository.Get(id);
         }
 
+        //function to update a user
         public async Task<User?> UpdateUser(User user)
         {
             if (user == null || string.IsNullOrEmpty(user.Id))
@@ -79,6 +80,7 @@ namespace BusinessLogicLayer.Service
             return existingUser;
         }
 
+        //function to delete a user
         public async Task<bool> DeleteUser(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -95,6 +97,17 @@ namespace BusinessLogicLayer.Service
             await _unitOfWork.userRepository.Delete(user);
 
             return true;
+        }
+
+        //function to login a user
+        public async Task<User?> AuthenticateUser(LoginUserDto loginDto)
+        {
+            if (string.IsNullOrEmpty(loginDto.Email) || string.IsNullOrEmpty(loginDto.Password))
+            {
+                return null;
+            }
+
+            return await _unitOfWork.userRepository.Authenticate(loginDto.Email, loginDto.Password);
         }
     }
 }

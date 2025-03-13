@@ -1,11 +1,7 @@
 ﻿using BusinessLogicLayer.IServices;
 using DataAccessLayer.UnitOfWorkFolder;
 using DomainLayer.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogicLayer.Service
 {
@@ -18,6 +14,7 @@ namespace BusinessLogicLayer.Service
             _unitOfWork = unitOfWork;
         }
 
+        //function to create a post
         public Post? CreatePost(Post post, out string message)
         {
             //checking if the user enters values
@@ -44,6 +41,7 @@ namespace BusinessLogicLayer.Service
             return _unitOfWork.postRepository.Create(post);
         }
 
+        //function to delete a post
         public bool DeletePost(int id, out string message)
         {
             //checking if the id is valid
@@ -68,11 +66,13 @@ namespace BusinessLogicLayer.Service
             return true;
         }
 
+        //function to get all posts
         public List<Post> GetAllPost()
         {
             return _unitOfWork.postRepository.GetAll();
         }
 
+        //function to get a single post
         public Post? GetPost(int id)
         {
             //checking if the id is valid
@@ -92,6 +92,7 @@ namespace BusinessLogicLayer.Service
             return post;
         }
 
+        //function to update a post
         public Post? UpdatePost(Post post, out string message)
         {
             //checking if the user enters values

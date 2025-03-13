@@ -6,12 +6,7 @@ using DomainLayer.LikeDto;
 using DomainLayer.Model;
 using DomainLayer.PostDto;
 using DomainLayer.UserDto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogicLayer.Configuration
 {

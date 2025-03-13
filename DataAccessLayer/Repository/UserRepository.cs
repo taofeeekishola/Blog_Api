@@ -1,11 +1,6 @@
 ﻿using DataAccessLayer.IRepository;
 using DomainLayer.Model;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repository
 {
@@ -70,6 +65,18 @@ namespace DataAccessLayer.Repository
             }
 
             return user;
+        }
+
+        public async Task<User?> Authenticate(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, password);
+            return isPasswordValid ? user : null;
         }
     }
    

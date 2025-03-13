@@ -1,9 +1,5 @@
 ﻿using DomainLayer.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DataAccessLayer.IRepository
 {
@@ -39,7 +35,15 @@ namespace DataAccessLayer.IRepository
         /// </summary>
         /// <param name="user"></param>
         Task<bool> Delete(User user);
-       
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task<User?> Authenticate(string email, string password);
+
 
     }
 }

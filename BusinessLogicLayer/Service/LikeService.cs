@@ -1,11 +1,7 @@
 ﻿using BusinessLogicLayer.IServices;
 using DataAccessLayer.UnitOfWorkFolder;
 using DomainLayer.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogicLayer.Service
 {
@@ -19,6 +15,7 @@ namespace BusinessLogicLayer.Service
             _unitOfWork = unitOfWork;
         }
 
+        //function to create a like
         public Like? CreateLike(Like like, out string message)
         {
             //checking if the user enters values
@@ -37,6 +34,7 @@ namespace BusinessLogicLayer.Service
             return _unitOfWork.likeRepository.Create(like);
         }
 
+        //function to delete a like
         public bool DeleteLike(int id, out string message)
         {
             //checking if the id is valid
@@ -62,11 +60,13 @@ namespace BusinessLogicLayer.Service
 
         }
 
+        //function to get all likes
         public List<Like> GetAllLike()
         {
             return _unitOfWork.likeRepository.GetAll();
         }
 
+        //function to get a single like
         public Like? GetLike(int id)
         {
             //checking if the id is valid

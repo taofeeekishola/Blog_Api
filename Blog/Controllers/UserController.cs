@@ -2,11 +2,9 @@
 using BusinessLogicLayer.IServices;
 using DomainLayer.Model;
 using DomainLayer.UserDto;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading.Tasks;
+
 
 namespace Blog.Controllers
 {
@@ -16,14 +14,17 @@ namespace Blog.Controllers
     {
         IUserService _userService;
         IMapper _imapper;
+        IAuthService _authService;
 
-        public UserController(IUserService userService, IMapper imapper)
+        public UserController(IUserService userService, IMapper imapper, IAuthService authService)
         {
             _userService = userService;
             _imapper = imapper;
+            _authService = authService;
         }
 
         //endpoint to get all users
+        [Authorize]
         [HttpGet]
         public IActionResult GetUsers()
         {
@@ -32,6 +33,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to get one user
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(string id)
         {
@@ -43,7 +45,7 @@ namespace Blog.Controllers
             }
 
             UserDto existingUser = _imapper.Map<UserDto>(user);
-            return Ok(user);
+            return Ok(existingUser);
         }
 
         //endpoint to create user
@@ -66,6 +68,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to update a user
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto userdto)
         {
@@ -93,5 +96,27 @@ namespace Blog.Controllers
             }
             return Ok(new { Message = "Deleted successfully" });
         }
+
+        // Endpoint for user login
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginUserDto loginDto)
+        {
+            var user = await _userService.AuthenticateUser(loginDto);
+            if (user == null)
+            {
+                return Unauthorized(new { Message = "Invalid email or password" });
+            }
+
+            // Generate JWT token using the AuthService
+            var token = _authService.GenerateJwtToken(user);
+
+            return Ok(new
+            {
+                Token = token,
+                User = _imapper.Map<UserDto>(user)
+            });
+        }
+
+
     }
 }

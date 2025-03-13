@@ -1,12 +1,7 @@
 ﻿using BusinessLogicLayer.IServices;
-using DataAccessLayer.IRepository;
 using DataAccessLayer.UnitOfWorkFolder;
 using DomainLayer.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogicLayer.Service
 {
@@ -19,6 +14,7 @@ namespace BusinessLogicLayer.Service
             _unitOfWork = unitOfWork;
         }
 
+        //function to create a comment
         public Comment? CreateComment(Comment comment, out string message)
         {
             //checking if the user enters values
@@ -43,6 +39,7 @@ namespace BusinessLogicLayer.Service
 
         }
 
+        //function to delete a comment
         public bool DeleteComment(int id, out string message)
         {
             //checking if the id is valid
@@ -67,11 +64,13 @@ namespace BusinessLogicLayer.Service
             return true;
         }
 
+        //function to get all comments
         public List<Comment> GetAllComments()
         {
             return _unitOfWork.commentRepository.GetAll();
         }
 
+        //function to get a single comment
         public Comment? GetComment(int id)
         {
             //checking if the id is valid
@@ -92,6 +91,7 @@ namespace BusinessLogicLayer.Service
             return comment;
         }
 
+        //function to update comments
         public Comment? UpdateComment(Comment comment, out string message)
         {
             //checking if the user enters values

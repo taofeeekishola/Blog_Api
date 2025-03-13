@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.IServices;
-using BusinessLogicLayer.Service;
 using DomainLayer.Model;
 using DomainLayer.PostDto;
-using DomainLayer.UserDto;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
@@ -23,6 +21,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to get all posts
+        [Authorize]
         [HttpGet]
         public IActionResult GetPost()
         {
@@ -31,6 +30,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to get one post
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -47,6 +47,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to create post
+        [Authorize]
         [HttpPost]
         public IActionResult CreatePost([FromBody] CreatePostDto postdto)
         {
@@ -65,6 +66,7 @@ namespace Blog.Controllers
         }
 
         //endpoint to update a post
+        [Authorize]
         [HttpPut]
         public IActionResult UpdatePost([FromBody] UpdatePostDto postdto)
         {

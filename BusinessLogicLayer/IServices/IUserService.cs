@@ -1,8 +1,6 @@
 ﻿using DomainLayer.Model;
 using DomainLayer.UserDto;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogicLayer.IServices
 {
@@ -43,5 +41,13 @@ namespace BusinessLogicLayer.IServices
         /// <param name="id">The user ID to delete</param>
         /// <returns>Boolean true if deleted successfully, otherwise false</returns>
         Task<bool> DeleteUser(string id);
+
+        /// <summary>
+        /// Authenticates a user based on the provided login credentials.
+        /// </summary>
+        /// <param name="loginDto">The login credentials provided by the user.</param>
+        /// <returns>A task that resolves to the authenticated user if successful, otherwise null.</returns>
+        Task<User?> AuthenticateUser(LoginUserDto loginDto);
+
     }
 }
